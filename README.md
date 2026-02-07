@@ -1,25 +1,25 @@
-📝 Todo API – ASP.NET Core Web API
+# 📝 Todo API – ASP.NET Core Web API
 
-A clean and well-structured RESTful Todo API built with ASP.NET Core Web API and Entity Framework Core.
-This project demonstrates backend best practices, clean architecture, DTO usage, validation, and proper error handling.
+A clean, well-structured **RESTful Todo API** built with **ASP.NET Core Web API** and **Entity Framework Core**.  
+This project demonstrates **backend best practices**, **clean architecture**, **DTO-based design**, **validation**, and **robust error handling**.
 
-The API supports full CRUD operations, filtering, pagination, and includes a dedicated endpoint to mark todos as completed.
+The API supports full **CRUD operations**, **filtering**, **pagination**, and includes a dedicated endpoint to **mark todos as completed**.
 
-🚀 Tech Stack
+---
 
-- ASP.NET Core Web API (.NET 8)
+## 🚀 Tech Stack
 
-- Entity Framework Core
+- **ASP.NET Core Web API (.NET 8)**
+- **Entity Framework Core**
+- **SQL Server**
+- **Swagger / OpenAPI**
+- **LINQ**
+- **RESTful API Design**
 
-- SQL Server
+---
 
-- Swagger / OpenAPI
+## 📁 Project Structure
 
-- LINQ
-
-RESTful API design
-
-📁 Project Structure
 TodoApi/
 ├── Controllers
 ├── Data
@@ -43,131 +43,148 @@ TodoApi/
 ├── TodoApi.http
 └── TodoApi.csproj
 
-The project follows separation of concerns:
 
-Controllers → HTTP layer
+---
 
-Services → business logic
+## 🧱 Architecture Overview
 
-Data → database access
+The project follows **Separation of Concerns**:
 
-DTOs → API contracts
+- **Controllers** → HTTP layer & request handling  
+- **Services** → Business logic  
+- **Data** → Database access & EF Core configuration  
+- **DTOs** → API contracts (request/response models)  
 
-🧩 Entity Overview
-TodoItem
-Field Description
-Id Unique identifier
-Title Required, min 3 – max 100 characters
-Description Optional, max 500 characters
-IsCompleted Completion status
-DueDate Optional due date
-Priority Integer value between 1–3
-CreatedAt Automatically set on creation
-UpdatedAt Automatically updated on changes
-🔗 API Endpoints
-CRUD Operations
-Method Endpoint Description
-GET /api/todos Get all todos (supports filtering & pagination)
-GET /api/todos/{id} Get todo by id
-POST /api/todos Create a new todo
-PUT /api/todos/{id} Update an existing todo
-DELETE /api/todos/{id} Delete a todo
-Extra Endpoint
-Method Endpoint Description
-PATCH /api/todos/{id}/complete Marks a todo as completed
-🔍 Filtering & Pagination
+This structure ensures **maintainability**, **testability**, and **scalability**.
 
-GET /api/todos supports optional query parameters:
+---
 
-isCompleted → true / false
+## 🧩 Entity Overview
 
-search → searches in title
+### TodoItem
 
-page → page number (default: 1)
+| Field        | Description |
+|--------------|------------|
+| `Id`         | Unique identifier |
+| `Title`      | Required, min 3 – max 100 characters |
+| `Description`| Optional, max 500 characters |
+| `IsCompleted`| Completion status |
+| `DueDate`    | Optional due date |
+| `Priority`   | Integer value between **1–3** |
+| `CreatedAt`  | Automatically set on creation |
+| `UpdatedAt`  | Automatically updated on changes |
 
-pageSize → items per page (default: 10, max: 100)
+---
 
-Example:
+## 🔗 API Endpoints
 
+### CRUD Operations
+
+| Method | Endpoint | Description |
+|------|---------|------------|
+| `GET` | `/api/todos` | Get all todos (supports filtering & pagination) |
+| `GET` | `/api/todos/{id}` | Get todo by id |
+| `POST` | `/api/todos` | Create a new todo |
+| `PUT` | `/api/todos/{id}` | Update an existing todo |
+| `DELETE` | `/api/todos/{id}` | Delete a todo |
+
+### Extra Endpoint
+
+| Method | Endpoint | Description |
+|------|---------|------------|
+| `PATCH` | `/api/todos/{id}/complete` | Mark a todo as completed |
+
+---
+
+## 🔍 Filtering & Pagination
+
+`GET /api/todos` supports optional query parameters:
+
+| Parameter | Description |
+|---------|------------|
+| `isCompleted` | `true` / `false` |
+| `search` | Searches in **title** |
+| `page` | Page number (default: `1`) |
+| `pageSize` | Items per page (default: `10`, max: `100`) |
+
+### Example
 GET /api/todos?isCompleted=false&search=api&page=1&pageSize=5
 
-✅ Validation & Error Handling
 
-DTO-based validation using Data Annotations
+---
 
-Automatic 400 Bad Request on invalid input
+## ✅ Validation & Error Handling
 
-404 Not Found for missing resources
+### Validation
+- DTO-based validation using **Data Annotations**
+- Automatic **400 Bad Request** on invalid input
+- **404 Not Found** for missing resources
 
-Global exception handling middleware:
+### Global Exception Handling
+- Custom middleware catches unhandled exceptions
+- Logs unexpected errors
+- Returns a generic **500 Internal Server Error** response
 
-Logs unexpected errors
+---
 
-Returns generic 500 Internal Server Error
+## 🗄️ Database & Migrations
 
-🗄️ Database & Migrations
+- **SQL Server** database
+- Database is created using **EF Core migrations**
+- Seed data is added automatically if the database is empty
 
-SQL Server database
+### Migration Commands
 
-Database is created via EF Core migrations
-
-Seed data is added automatically if the database is empty
-
-Migration Commands
+```powershell
 Add-Migration InitialCreate
 Update-Database
+```
 
-⚙️ Configuration
+## ⚙️ Configuration
+
 appsettings.json
 
 Contains safe placeholder configuration.
 
-appsettings.Development.json (not committed)
+Create appsettings.Development.json locally (not committed):
 
-Create this file locally for your connection string:
-
+```powershell
 {
-"ConnectionStrings": {
-"DefaultConnection": "<your-sql-server-connection-string>"
+  "ConnectionStrings": {
+    "DefaultConnection": "YOUR_CONNECTION_STRING"
+  }
 }
-}
+```
 
-📄 Swagger & API Documentation
+## 📄 Swagger & API Documentation
 
 Swagger UI enabled
 
 XML comments added for endpoints
 
-Clear request/response documentation
+Clear request & response documentation
 
 Access Swagger at:
 
-https://localhost:<port>/swagger
+```powershell
+https://localhost:{PORT}/swagger
+```
 
-🧪 Testing
+## 🧪 Testing
 
-A TodoApi.http file is included to test endpoints directly from Visual Studio without Postman.
+A TodoApi.http file is included to test endpoints directly from Visual Studio
+(no Postman required).
 
-⭐ Highlights
+## ⭐ Highlights
 
-Clean architecture & service abstraction
+- Clean architecture & service abstraction
 
-DTO-based API design
+- DTO-based API design
 
-Global exception handling
+- Global exception handling middleware
 
-Seed data for demo purposes
+- Seed data for demo purposes
 
-Swagger documentation
+- Swagger documentation
 
-Git-safe configuration handling
-
-📌 Purpose
-
-This project was built as a portfolio-ready backend assignment to demonstrate:
-
-ASP.NET Core Web API fundamentals
-
-Clean code & architecture principles
-
-Real-world backend development practices
+- Git-safe configuration handling
