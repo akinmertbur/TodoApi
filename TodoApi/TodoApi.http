@@ -1,0 +1,34 @@
+@TodoApi_HostAddress = http://localhost:5295
+
+### Get all todos
+GET {{TodoApi_HostAddress}}/api/todos
+Accept: application/json
+
+###
+
+### Get completed todos
+GET {{TodoApi_HostAddress}}/api/todos?isCompleted=true
+Accept: application/json
+
+###
+
+### Create a new todo
+POST {{TodoApi_HostAddress}}/api/todos
+Content-Type: application/json
+
+{
+  "title": "Test Todo from http file",
+  "description": "Created using TodoApi.http",
+  "priority": 2,
+  "dueDate": "2026-02-10T12:00:00Z"
+}
+
+###
+
+### Mark todo as completed
+PATCH {{TodoApi_HostAddress}}/api/todos/1/complete
+
+###
+
+### Delete a todo
+DELETE {{TodoApi_HostAddress}}/api/todos/1
